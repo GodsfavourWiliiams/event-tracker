@@ -1,0 +1,28 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.Task-Body {
+    width: 500px;
+    border: 1px solid rgb(191, 169, 212);
+    padding: 20px;
+    border-radius: 5px;
+    margin: auto;
+}
+
+.event {
+    background-color: rgb(226, 223, 223);
+    cursor: pointer;
+}
+
+.event-reminder {
+    border-left: 5px solid green;
+}
+
+.addEvent {
+    /* display: ; */
+}
+
+.addEvent.toggle {
+    display: block;
+}
