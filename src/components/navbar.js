@@ -1,27 +1,19 @@
 import PropTypes from 'prop-types';
 import './style.css';
 import Button from './Button';
-import { useState } from 'react';
+// import { useState } from 'react';
 
- const Navbar = ({title}) => {
-    //   const [selected, setselected] = useState(null)
-    const onClick = () =>{
-      if (true) {
-         console.log('clicked')
-
-     
-      }
-
-    }
+ const Navbar = ({title, onAdd, showModal}) => {
+    //   const [selected, setselected] = useState(null) 
      
     return (
-        <div className="header mx-auto d-flex align-items-center justify-content-between">
+        <div className="header mx-auto d-flex align-items-center justify-content-between px-3">
             <h2 className=" py-2">{title}</h2>
            <Button
-           color='green'
-           text='Add'
+           color={showModal ? 'red':'green' }
+           text={showModal ? 'Close':'Add' }
            textColor='white'
-           onClick={onClick}
+           onClick={onAdd}
            />
         </div>
     )

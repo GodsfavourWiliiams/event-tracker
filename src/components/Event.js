@@ -3,14 +3,14 @@ import './style.css'
 
 //  import {Fatimes} from 'react-icon/fa'
 
- const Event = ({tasks, onDelete, onToggle}) => {
+ const Event = ({tasks, onDelete, onToggle}) => {   
     return (
-        <div className={ `event py-2 px-3 rounded my-2 ${tasks.reminder ? 'event-reminder' : '' }` }
+        <div className={ `mx-3 event py-2 px-3 rounded my-2 ${tasks.reminder ? 'event-reminder' : '' }` }
         onDoubleClick={() =>onToggle(tasks.id)}>
             <h6 className='d-flex align-items-center justify-content-between'>
                 {tasks.text}
                  <Button style={{cursor:'pointer'}}
-                onClick={() =>onDelete(tasks.id)}
+                onClick={() => onDelete(tasks.id)}
                 color='transparent'
                 text='x'
                 textColor='red'
@@ -23,4 +23,4 @@ import './style.css'
     )
 }
 
-export default Event
+export default Event;

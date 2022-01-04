@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
+  const [showModal, setShowModal]=useState(false)
   const [tasks, setTasks] = useState(
     [
     {
@@ -40,11 +41,17 @@ function App() {
     ])
     // Delete task 
     const deleteTask = (id) => {
-      console.log('delete', id)
+      console.log('deleted', id)
       setTasks(tasks.filter((tasks) => tasks.id !==id))
     }
-
-    // Toggle Reminder
+// Add event
+    const addEvent =(task)=>{
+      const id= Math.floor(Math.random()  *10000) + 1
+      console.log('Added', id)
+      const newTask = {id, ...task}
+      setTasks([...tasks, newTask])
+    }
+// Toggle Reminder
     const toggleReminder = (id) =>{
     console.log(id,'DoubleClicked')
     setTasks(tasks.map((tasks) => tasks.id === id ? {...tasks, reminder:
@@ -56,14 +63,19 @@ function App() {
     <div className='Task-Body'>
       <Navbar 
       title='Task Tracker'
+      onAdd={() => setShowModal(!showModal)
+      }
+      showModal={showModal}
       />
-      <Modal/>
+      {showModal && <Modal
+      onAdd={addEvent}
+      />}
       {tasks.length > 0 ? (
       <Tasks tasks={tasks}
       onDelete={deleteTask}
       onToggle={toggleReminder}
       />
-      ) : ('No Task To Show')}
+      ) : ('No Event Available')}
     </div>
   );
 }
