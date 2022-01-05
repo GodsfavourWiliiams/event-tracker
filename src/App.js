@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Navbar from '../src/components/navbar';
 import Tasks from './components/Tasks';
 import Modal from './components/Modal';
+import Footer from './components/Footer';
 import './components/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -78,9 +79,9 @@ function App() {
       )
     }
   return (
-    <div className='Task-Body mt-5 p-3'>
+    <div className=''>
       <Navbar 
-      title='Task Tracker'
+      title='Event Tracker'
       onAdd={() => setShowModal(!showModal)
       }
       showModal={showModal}
@@ -94,6 +95,7 @@ function App() {
       onToggle={toggleReminder}
       />
       ) : ('No Event Available')}
+      <Footer/>
     </div>
   );
 }

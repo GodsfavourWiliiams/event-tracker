@@ -29,7 +29,7 @@ const Modal = ({onAdd}) => {
         setReminder(false)
     }
     return (
-        <form onSubmit={onSubmit} className="addTask">
+        <form onSubmit={onSubmit} className="addTask Task-Body p-3 mt-4">
                     <div className="form-group">
                         <label  className="fw-bold my-2">Event</label>
                         <input type="text" placeholder="Add Event" value={text} onChange={(e) => setText(e.target.value) }className="form-control"/>
