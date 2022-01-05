@@ -7,7 +7,7 @@ import Button from './Button';
     //   const [selected, setselected] = useState(null) 
      
     return (
-        <div className="header mx-auto d-flex align-items-center justify-content-between px-3">
+        <div className="header mx-auto d-flex align-items-center justify-content-between">
             <h2 className=" py-2">{title}</h2>
            <Button
            color={showModal ? 'red':'green' }

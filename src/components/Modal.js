@@ -2,7 +2,7 @@ import { useState } from "react";
 // import Button from './Button'
 
 
-const Modal = ({onAdd, howModal}) => {
+const Modal = ({onAdd}) => {
     const [text, setText]= useState('')
     const [day, setDay]= useState('')
     const [reminder, setReminder]= useState(false)
@@ -29,7 +29,7 @@ const Modal = ({onAdd, howModal}) => {
         setReminder(false)
     }
     return (
-        <form onSubmit={onSubmit} className="addTask shadow p-3 rounded-3">
+        <form onSubmit={onSubmit} className="addTask">
                     <div className="form-group">
                         <label  className="fw-bold my-2">Event</label>
                         <input type="text" placeholder="Add Event" value={text} onChange={(e) => setText(e.target.value) }className="form-control"/>
@@ -42,8 +42,7 @@ const Modal = ({onAdd, howModal}) => {
                         <label  className="fw-bold">Set Reminder</label>
                         <input type="checkbox" className="mt-1" checked={reminder} value={reminder} onChange={(e) => setReminder(e.currentTarget.checked) }/>
                     </div>
-                    <div className="">
-                    <button type="" className="btn w-100 btn-danger mt-4 mb-2">Close</button>
+                    <div className="py-4">
                         <button type="submit" className="btn w-100 btn-success">Save Event</button>
                     </div>
         </form>

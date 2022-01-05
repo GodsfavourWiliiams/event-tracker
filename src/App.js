@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../src/components/navbar';
 import Tasks from './components/Tasks';
 import Modal from './components/Modal';
@@ -12,55 +12,73 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [showModal, setShowModal]=useState(false)
-  const [tasks, setTasks] = useState(
-    [
-    {
-      id:1,
-      text: 'Doctors Appointment',
-      day:'Feb 5th at 2:30pm',
-      reminder: true
-    }, {
-        id:2,
-        text: 'Meeting at School',
-        day:'Feb 6th at 5:30pm',
-        reminder: true
-      },
-      {
-        id:3,
-        text: 'Food Shopping',
-        day:'Feb 10th at 6:00pm',
-        reminder: true
-      },
-      {
-        id:4,
-        text: 'Algorithm Practice',
-        day:'Feb 15th at 12:30am',
-        reminder: false
-       }
-      
-    ])
+  const [tasks, setTasks] = useState([])
+ useEffect(() =>{
+  const getEvents = async() => {
+    const eventsFronServer = await fetchEvents() 
+    setTasks(eventsFronServer)
+  }
+  getEvents()
+   
+ },[]
+ )
+//  fetch events 
+ const fetchEvents = async () => {
+  const res = await fetch('http://localhost:5000/events')
+   const data = await res.json()
+   console.log(data)
+
+   return data
+ }
+//  
+ const fetchEvent = async (id) => {
+  const res = await fetch(`http://localhost:5000/events/${id}`)
+   const data = await res.json()
+   console.log(data)
+
+   return data
+ }
     // Delete task 
-    const deleteTask = (id) => {
+    const deleteTask = async(id) => {
+      await fetch(`http://localhost:5000/events/${id}`, {method:'Delete'})
       console.log('deleted', id)
       setTasks(tasks.filter((tasks) => tasks.id !==id))
     }
 // Add event
-    const addEvent =(task)=>{
-      const id= Math.floor(Math.random()  *10000) + 1
-      console.log('Added', id)
-      const newTask = {id, ...task}
-      setTasks([...tasks, newTask])
+    const addEvent = async (task) =>  {
+      const res = await fetch('http://localhost:5000/events', {
+        method:'POST',
+        headers:  {
+          'Content-type': 'application/json',
+        },
+        body:JSON.stringify(task),
+      }) 
+      const data = await res.json()
+      setTasks([...tasks, data])
     }
 // Toggle Reminder
-    const toggleReminder = (id) =>{
+    const toggleReminder = async (id) =>{
+      const eventToggle =await fetchEvent(id)
+      const updateEvent ={...eventToggle,
+      reminder:!eventToggle.reminder}
+      const res = await fetch(`http://localhost:5000/events/${id}`, {
+        method:'PuT',
+        headers:  {
+          'Content-type': 'application/json',
+        },
+        body:JSON.stringify(updateEvent),
+      }) 
+
+      const data = await res.json()       
+
     console.log(id,'DoubleClicked')
     setTasks(tasks.map((tasks) => tasks.id === id ? {...tasks, reminder:
-       !tasks.reminder} : tasks
+       data.reminder} : tasks
         )
       )
     }
   return (
-    <div className='Task-Body'>
+    <div className='Task-Body mt-5 p-3'>
       <Navbar 
       title='Task Tracker'
       onAdd={() => setShowModal(!showModal)

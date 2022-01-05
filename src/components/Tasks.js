@@ -5,10 +5,10 @@ const Tasks = ({tasks, onDelete, onToggle}) => {
    
     return (
         <>
-         {tasks.map((tasks) => 
+         {tasks.map((tasks, index) => 
          (
          <Event 
-         key={tasks.id} 
+         key={index} 
          tasks={tasks} 
          onDelete={onDelete}
          onToggle={onToggle}/>

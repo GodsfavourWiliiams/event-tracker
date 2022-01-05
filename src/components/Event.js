@@ -5,7 +5,7 @@ import './style.css'
 
  const Event = ({tasks, onDelete, onToggle}) => {   
     return (
-        <div className={ `mx-3 event py-2 px-3 rounded my-2 ${tasks.reminder ? 'event-reminder' : '' }` }
+        <div className={ `event py-2 px-3 rounded my-2 ${tasks.reminder ? 'event-reminder' : '' }` }
         onDoubleClick={() =>onToggle(tasks.id)}>
             <h6 className='d-flex align-items-center justify-content-between'>
                 {tasks.text}
